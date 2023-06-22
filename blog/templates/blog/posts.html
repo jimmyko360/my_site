@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  All Posts
+{% endblock %}
+
+{% block body_content %}
+  <h1>All Posts</h1>
+  <ul>
+    {% for title in titles %}
+      <li>{{ title }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
