@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+  {{ blog_post.title }}
+{% endblock %}
+
+{% block body_content %}
+  <h1>
+    {{ blog_post.title }}
+  </h1>
+  <p>
+    {{ blog_post.body }}
+  </p>
+{% endblock %}
