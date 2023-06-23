@@ -1,27 +1,7 @@
 from django.shortcuts import render
-import datetime
 from django.http import Http404
-
-posts = [
-    {
-        "title": "my first post",
-        "slug": "my-first-post",
-        "body": "wassup chat",
-        "date": datetime.datetime(2023, 3, 1)
-    },
-    {
-        "title": "my second post",
-        "slug": "my-second-post",
-        "body": "its ya boi jkizzle",
-        "date": datetime.datetime(2023, 4, 1)
-    },
-    {
-        "title": "my third post",
-        "slug": "my-third-post",
-        "body": "live on twitch.tv",
-        "date": datetime.datetime(2023, 5, 1)
-    },
-]
+from data import posts
+# you don't have to navigate to the data file with ..'s, weird
 
 def post_by_title(request, slug):
   try:
@@ -37,12 +17,19 @@ def post_by_title(request, slug):
     raise Http404()
 
 def all_posts(request):
-  titles = []
+  try:
+    titles = []
 
-  for post in posts:
-    titles.append({
-      "title": post["title"],
-      "slug": post["slug"],
-    })
+    for post in posts:
+      titles.append({
+        "title": post["title"],
+        "slug": post["slug"],
+      })
 
-  return render(request, "blog/posts.html", {"titles": titles})
+    return render(request, "blog/posts.html", {"titles": titles})
+  except:
+    return Http404()
+
+def index(request):
+  # using a try/except block here was causing an error, why?
+  return render(request, "blog/index.html", {"blog_post": posts[0]})
