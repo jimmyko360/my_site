@@ -29,7 +29,3 @@ def all_posts(request):
     return render(request, "blog/posts.html", {"titles": titles})
   except:
     return Http404()
-
-def index(request):
-  # using a try/except block here was causing an error, why?
-  return render(request, "blog/index.html", {"blog_post": posts[0]})
