@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% comment %}
-  it looks like you can't reference a dict's properties in the squiggly bracket interpolation e.g. you can't say blog_post["title"], you can only say title
+  for some reason, you MUST use dot notation when reference key-value pairs in a template e.g. blog_post.title, not blog_post["title"]
 {% endcomment %}
 
 {% block page_title %}
-  {{ title }}
+  {{ blog_post.title }}
 {% endblock %}
 
 {% block body_content %}
-  <h1>{{ title }}</h1>
+  <h1>{{ blog_post.title }}</h1>
   <p>
-    {{ body }}
+    {{ blog_post.body }}
   </p>
 {% endblock %}

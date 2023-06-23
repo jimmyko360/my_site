@@ -27,12 +27,12 @@ def post_by_title(request, slug):
   try:
     blog_post = {}
 
+    # key-value reference MUST use bracket notation in this file for some reason, e.g. in this view and the all_posts view
     for post in posts:
       if slug == post["slug"]:
         blog_post = post
 
-    # if you want pass multiple values to the template, you should break them up into separate dict properties here because you can't use key-value pair references in template interpolation
-    return render(request, "blog/blog_post.html", {"title": blog_post["title"], "body": blog_post["body"]})
+    return render(request, "blog/blog_post.html", {"blog_post": blog_post})
   except:
     raise Http404()
 
@@ -40,6 +40,9 @@ def all_posts(request):
   titles = []
 
   for post in posts:
-    titles.append(post["title"])
+    titles.append({
+      "title": post["title"],
+      "slug": post["slug"],
+    })
 
   return render(request, "blog/posts.html", {"titles": titles})

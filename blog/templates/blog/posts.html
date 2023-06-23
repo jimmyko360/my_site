@@ -8,7 +8,9 @@
   <h1>All Posts</h1>
   <ul>
     {% for title in titles %}
-      <li>{{ title }}</li>
+    <li>
+      <a href={{ title.slug }}>{{ title.title }}</a>
+    </li>
     {% endfor %}
   </ul>
 {% endblock %}
