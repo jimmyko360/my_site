@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% comment %}
+  it looks like you can't reference a dict's properties in the squiggly bracket interpolation e.g. you can't say blog_post["title"], you can only say title
+{% endcomment %}
+
+{% block page_title %}
+  {{ title }}
+{% endblock %}
+
+{% block body_content %}
+  <h1>{{ title }}</h1>
+  <p>
+    {{ body }}
+  </p>
+{% endblock %}
