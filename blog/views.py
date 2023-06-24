@@ -10,7 +10,7 @@ def post_by_title(request, slug):
   for post in posts:
     title = slug.replace("-", " ")
 
-    if title == post["title"]:
+    if title == post["title"].lower():
       blog_post = post
     # ^this process will be very inefficient if you have a lot of posts
   if blog_post:
@@ -23,7 +23,7 @@ def all_posts(request):
     titles = []
 
     for post in posts:
-      slug = post["title"].replace(" ", "-")
+      slug = post["title"].replace(" ", "-").lower()
 
       titles.append({
         "title": post["title"],

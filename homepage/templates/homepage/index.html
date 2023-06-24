@@ -22,6 +22,9 @@
         <h3>
           {{ blog_post.title|title }}
         </h3>
+        {% comment %}
+          I should probably just let users type in any case that they want but whatever
+        {% endcomment %}
         <p>
           {{ blog_post.body }}
         </p>
