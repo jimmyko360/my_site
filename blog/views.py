@@ -8,10 +8,13 @@ def post_by_title(request, slug):
 
   # key-value reference MUST use bracket notation in this file for some reason, e.g. in this view and the all_posts view
   for post in posts:
-    if slug == post["slug"]:
+    title = slug.replace("-", " ")
+
+    if title == post["title"]:
       blog_post = post
+    # ^this process will be very inefficient if you have a lot of posts
   if blog_post:
-    return render(request, "blog/blog_post.html", {"blog_post": blog_post})
+    return render(request, "blog/blog_post.html", {"blog_post": blog_post, "slug": slug})
   else:
     raise Http404()
 
@@ -20,9 +23,11 @@ def all_posts(request):
     titles = []
 
     for post in posts:
+      slug = post["title"].replace(" ", "-")
+
       titles.append({
         "title": post["title"],
-        "slug": post["slug"],
+        "slug": slug,
       })
 
     return render(request, "blog/posts.html", {"titles": titles})
