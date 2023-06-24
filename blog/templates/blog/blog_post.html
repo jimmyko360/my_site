@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "homepage/index.css" %}">
+  <link rel="stylesheet" href="{% static "homepage/includes/header.css" %}">
+{% endblock %}
 
 {% comment %}
   for some reason, you MUST use dot notation when reference key-value pairs in a template e.g. blog_post.title, not blog_post["title"]
@@ -10,8 +16,10 @@
 
 {% block body_content %}
   {% include "homepage/includes/header.html" %}
-  <h1>{{ blog_post.title }}</h1>
-  <p>
-    {{ blog_post.body }}
-  </p>
+  <div class="body">
+    <h1>{{ blog_post.title }}</h1>
+    <p>
+      {{ blog_post.body }}
+    </p>
+  </div>
 {% endblock %}
