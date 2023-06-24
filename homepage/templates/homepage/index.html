@@ -18,7 +18,7 @@
         <img src="{% static "homepage/calvin-hobbes-pokemon.jpg" %}">
         <h1 class="intro-header">Jimjam's Blog</h1>
       </div>
-      <a class="featured-post" href="{% url "post_by_title" blog_post.slug %}">
+      <a class="featured-post" href="{% url "post_by_title" slug %}">
         <h3>
           {{ blog_post.title|title }}
         </h3>
