@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static "homepage/index.css" %}">
+  <link rel="stylesheet" href="{% static "blog/posts.css" %}">
+  <link rel="stylesheet" href="{% static "homepage/includes/header.css" %}">
+{% endblock %}
 
 {% block page_title %}
   All Posts
@@ -6,16 +13,18 @@
 
 {% block body_content %}
   {% include "homepage/includes/header.html" %}
-  <h1>All Posts</h1>
-  <ul>
-    {% for title in titles %}
-    <li>
-      {% comment %}
-        you actually don't need to use the url template tag here since the url is solely comprised of the slug. maybe it would be more appropriate for a situation where you reference an endpoint in another app but this is unnecessary. the same scenario occurs in monthly_challenges where we needlessly use {% url %}
-      {% endcomment %}
-      {% url "post_by_title" title.slug as post_link %}
-      <a href={{ post_link }}>{{ title.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  <div class="body">
+    <h1>All Posts</h1>
+    <div class="posts-list">
+      {% for title in titles %}
+        {% url "post_by_title" title.slug as post_link %}
+        <a class="post" href={{ post_link }}>
+          {% comment %}
+            you actually don't need to use the url template tag here since the url is solely comprised of the slug. maybe it would be more appropriate for a situation where you reference an endpoint in another app but this is unnecessary. the same scenario occurs in monthly_challenges where we needlessly use {% url %}
+          {% endcomment %}
+          <p>{{ title.title }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
