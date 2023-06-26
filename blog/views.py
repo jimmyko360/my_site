@@ -21,6 +21,7 @@ def post_by_title(request, slug):
 
 def post_date(post):
   return post.get("date")
+  # use .get() here because it will fail gracefully if there is no "date" rather than crashing
 
 def all_posts(request):
   try:
