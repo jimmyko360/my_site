@@ -8,6 +8,6 @@ def index(request):
   try:
     slug = posts[0]["title"].replace(" ", "-").lower()
 
-    return render(request, "homepage/index.html", {"blog_post": posts[0], "slug": slug})
+    return render(request, "homepage/index.html", {"blog_post": posts[-1], "slug": slug})
   except:
     raise Http404()
