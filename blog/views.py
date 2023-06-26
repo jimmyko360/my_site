@@ -18,18 +18,24 @@ def post_by_title(request, slug):
   else:
     raise Http404()
 
+
+def post_date(post):
+  return post.get("date")
+
 def all_posts(request):
   try:
-    titles = []
+    sorted_posts = sorted(posts, key=post_date, reverse=True)
 
-    for post in posts:
+    previews = []
+
+    for post in sorted_posts:
       slug = post["title"].replace(" ", "-").lower()
 
-      titles.append({
+      previews.append({
         "title": post["title"],
         "slug": slug,
       })
 
-    return render(request, "blog/posts.html", {"titles": titles})
+    return render(request, "blog/posts.html", {"titles": previews})
   except:
     raise Http404()
