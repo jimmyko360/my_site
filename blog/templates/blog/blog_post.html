@@ -22,7 +22,7 @@
       {{ blog_post.body }}
     </p>
     <time>
-      {{ blog_post.date }}
+      {{ blog_post.date|date:"SHORT_DATE_FORMAT" }}
     </time>
   </div>
 {% endblock %}
