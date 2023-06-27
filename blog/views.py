@@ -4,18 +4,17 @@ from data import posts
 # you don't have to navigate to the data file with ..'s, weird
 
 def post_by_title(request, slug):
-  blog_post = None
-
   # key-value reference MUST use bracket notation in this file for some reason, e.g. in this view and the all_posts view
-  for post in posts:
+  try:
     title = slug.replace("-", " ")
+    identified_post = next(post for post in posts if title == post["title"])
 
-    if title == post["title"].lower():
-      blog_post = post
-    # ^this process will be very inefficient if you have a lot of posts
-  if blog_post:
-    return render(request, "blog/blog_post.html", {"blog_post": blog_post, "slug": slug})
-  else:
+    # next() is a python function that basically does the same thing that I was doing before
+    # define a variable outside of the scope of the for loop
+    # loop through the list and assign the value that you're looking for to that variable
+
+    return render(request, "blog/blog_post.html", {"blog_post": identified_post, "slug": slug})
+  except:
     raise Http404()
 
 
@@ -30,7 +29,7 @@ def all_posts(request):
     previews = []
 
     for post in sorted_posts:
-      slug = post["title"].replace(" ", "-").lower()
+      slug = post["title"].replace(" ", "-")
 
       previews.append({
         "title": post["title"],
